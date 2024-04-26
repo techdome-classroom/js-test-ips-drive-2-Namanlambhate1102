@@ -8,10 +8,20 @@ var romanToInt = function(s) {
         'D': 500,
         'M': 1000
     };
+
+    if (typeof s !== 'string' || s.length === 0) {
+        throw new Error('Input is not a valid string or is empty.');
+    }
+
     let total = 0;
+
     for (let i = 0; i < s.length - 1; i++) {
         const currentValue = romanValues[s[i]];
         const nextValue = romanValues[s[i + 1]];
+
+        if (!currentValue || !nextValue) {
+            throw new Error('Invalid Roman numeral: ' + s[i] + s[i + 1]);
+        }
 
         if (currentValue < nextValue) {
             total -= currentValue;
@@ -19,7 +29,13 @@ var romanToInt = function(s) {
             total += currentValue;
         }
     }
-    total += romanValues[s[s.length - 1]]; // Add the value of the last character
+
+    const lastValue = romanValues[s[s.length - 1]];
+    if (!lastValue) {
+        throw new Error('Invalid Roman numeral: ' + s[s.length - 1]);
+    }
+
+    total += lastValue;
+
     return total;
 };
-
