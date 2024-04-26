@@ -1,7 +1,4 @@
-/**
- * @param {string} s
- * @return {number}
- */
+
 var romanToInt = function(s) {
     const romanValues = {
         'I': 1,
@@ -12,7 +9,6 @@ var romanToInt = function(s) {
         'D': 500,
         'M': 1000
     };
-
     let total = 0;
     for (let i = 0; i < s.length; i++) {
         const currentValue = romanValues[s[i]];
