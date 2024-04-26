@@ -1,23 +1,27 @@
-function longestSubstring(s) {
-    let mxlen = 0;
-    let left = 0;
-    const charMap = new Map();  
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var romanToInt = function(s) {
+    const romanValues = {
+        'I': 1,
+        'V': 5,
+        'X': 10,
+        'L': 50,
+        'C': 100,
+        'D': 500,
+        'M': 1000
+    };
 
-    for (let right = 0; right < s.length; right++) {
-        const currChar = s[right];
+    let total = 0;
+    for (let i = 0; i < s.length; i++) {
+        const currentValue = romanValues[s[i]];
+        const nextValue = romanValues[s[i + 1]];
 
-         
-        if (charMap.has(currChar) && charMap.get(currChar) >= left) {
-            left = charMap.get(currChar) + 1;
+        if (nextValue && currentValue < nextValue) {
+            total -= currentValue;
+        } else {
+            total += currentValue;
         }
-
-         charMap.set(currChar, right);
-
-         mxlen = Math.max(mxlen, right - left + 1);
     }
-
-    return mxlen;
-}
-
-
-module.exports = { longestSubstring };
+    return total;
