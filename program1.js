@@ -5,7 +5,6 @@ var isValid = function(s) {
       '[': ']',
       '{': '}'
   };
-
   for (let i = 0; i < s.length; i++) {
       const char = s[i];
       if (pairs[char]) {
@@ -17,7 +16,6 @@ var isValid = function(s) {
           }
       }
   }
-
   return stack.length === 0;
 };
 
